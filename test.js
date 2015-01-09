@@ -35,3 +35,17 @@ test('empty object for missing file', function (t) {
   t.deepEqual(config, {}, 'empty');
   t.end();
 });
+
+test('with root', function (t) {
+  
+  fs.outputFileSync('.config.json', '{"key":"value"}');
+    
+  var config =  jfig('.config.json', {
+    root: process.cwd()
+  });
+  
+  t.deepEqual(config, {key: 'value'}, 'config');
+  
+  fs.removeSync('.config.json');
+  t.end();
+});

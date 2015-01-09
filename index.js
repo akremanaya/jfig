@@ -2,15 +2,18 @@ var clearRequire = require('clear-require');
 var find = require('lodash.find');
 var isObject = require('amp-is-object');
 var isString = require('amp-is-string');
+var join = require('join-path');
 
-module.exports = function (data) {
+module.exports = function (data, options) {
+  
+  options = options || {};
   
   // Return object passed in
   if (isObject(data) && !Array.isArray(data)) {
     return data;
   }
   
-  var config = file(data);
+  var config = file(join(options.root, data));
   
   return config;
 };

@@ -1,6 +1,6 @@
 {
   "name": "jfig",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "JSON file loader or JSON pass through",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,7 @@
     "amp-is-object": "^1.0.1",
     "amp-is-string": "^1.0.1",
     "clear-require": "^1.0.1",
+    "join-path": "^1.0.0",
     "lodash.find": "^2.4.1"
   },
   "devDependencies": {
