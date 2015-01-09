@@ -21,7 +21,7 @@ function file (filename) {
   try {
     
     // Handle config file name
-    if (_.isString(filename)) {
+    if (isString(filename))) {
       config = load(filename);
     }
     
@@ -47,4 +47,9 @@ function load (filename) {
   
   clearRequire(filename);
   return require(filename);
+}
+
+function isString (str) {
+  
+  return typeof str === 'string';
 }
