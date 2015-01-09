@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/scottcorgan/jfig",
   "dependencies": {
+    "amp-is-object": "^1.0.1",
+    "amp-is-string": "^1.0.1",
     "clear-require": "^1.0.1",
-    "lodash": "^2.4.1"
+    "lodash.find": "^2.4.1"
   },
   "devDependencies": {
     "fs-extra": "^0.14.0",
