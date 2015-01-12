@@ -32,6 +32,15 @@ var something = {
 var config = jfig(something);
 ```
 
+## API
+
+### jsfig(data[, options])
+
+* `data` - file path or object to parse
+* `options`
+  * `root` - the root path if a file path is provided
+  * `pluck` - a string or array of keys to plucks the values out of the config file or object
+
 ## Run Test
 
 ```

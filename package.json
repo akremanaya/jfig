@@ -1,6 +1,6 @@
 {
   "name": "jfig",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "JSON file loader or JSON pass through",
   "main": "index.js",
   "scripts": {

@@ -49,3 +49,45 @@ test('with root', function (t) {
   fs.removeSync('.config.json');
   t.end();
 });
+
+test('plucking value', function (t) {
+  
+  var config;
+  
+  fs.outputFileSync('.config.json', JSON.stringify({
+    settings: {
+      key: 'value'
+    }
+  }));
+  
+  // From filename
+  config = jfig('.config.json', {
+    root: process.cwd(),
+    pluck: 'settings'
+  });
+  
+  t.deepEqual(config, {key: 'value'}, 'filename');
+  
+  // From object
+  config = jfig({
+    settings: {
+      key: 'value'
+    }
+  }, {
+    pluck: 'settings'
+  });
+  
+  t.deepEqual(config, {key: 'value'}, 'object');
+  
+  // Array of values
+  config = jfig({
+    settings2: {
+      key: 'value'
+    }
+  }, {
+    pluck: ['settings1', 'settings2']
+  });
+  
+  t.deepEqual(config, {key: 'value'}, 'array of values');
+  t.end();
+});
