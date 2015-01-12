@@ -17,9 +17,9 @@ module.exports = function (data, options) {
     return pluckFirst(data, data, options);
   }
   
-  var config = file(data, options);
+  var results = file(data, options);
   
-  return pluckFirst(config, data, options);
+  return pluckFirst(results.config, results.filename, options);
 };
 
 function file (filename, options) {
@@ -50,7 +50,10 @@ function file (filename, options) {
   }
   catch (e) {}
   
-  return config;
+  return {
+    config: config,
+    filename: filename
+  };
 }
 
 function load (filename) {
