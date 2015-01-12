@@ -18,6 +18,20 @@ test('filename string', function (t) {
   t.end();
 });
 
+test('filename array', function (t) {
+  
+  fs.outputFileSync('.config.json', '{"key":"value"}');
+  
+  var config =  jfig(['some-config.json', '.config.json',], {
+    root: process.cwd()
+  });
+  
+  t.deepEqual(config, {key: 'value'}, 'config');
+  
+  fs.removeSync('.config.json');
+  t.end();
+});
+
 test('object', function (t) {
   
   var config = jfig({

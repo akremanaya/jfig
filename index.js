@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 var clearRequire = require('clear-require');
 var find = require('lodash.find');
 var isObject = require('amp-is-object');
@@ -15,12 +17,12 @@ module.exports = function (data, options) {
     return pluckFirst(data, options.pluck);
   }
   
-  var config = file(join(options.root, data));
+  var config = file(data, options);
   
   return pluckFirst(config, options.pluck);
 };
 
-function file (filename) {
+function file (filename, options) {
   
   var config = {};
   
@@ -29,7 +31,7 @@ function file (filename) {
     
     // Handle config file name
     if (isString(filename)) {
-      config = load(filename);
+      config = load(join(options.root, filename));
     }
     
     // Handle array of config file names as strings
@@ -37,11 +39,12 @@ function file (filename) {
       
       filename = find(filename, function (name) {
         
-        return isString(name) && fs.existsSync(name);
+        return isString(name) && fs.existsSync(join(options.root, name));
       });
       
+      
       if (filename) {
-        config = load(filename);
+        config = load(join(options.root, filename));
       }
     }
   }
