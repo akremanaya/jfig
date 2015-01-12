@@ -105,3 +105,35 @@ test('plucking value', function (t) {
   t.deepEqual(config, {key: 'value'}, 'array of values');
   t.end();
 });
+
+test('plucking value as function', function (t) {
+  
+  t.plan(3);
+  
+  var config;
+  
+  fs.outputFileSync('.config.json', JSON.stringify({
+    settings: {
+      key: 'value'
+    }
+  }));
+  
+  // From filename
+  config = jfig('.config.json', {
+    root: process.cwd(),
+    pluck: function (obj, filename) {
+      
+      t.deepEqual(obj, {
+        settings: {
+          key: 'value'
+        }
+      }, 'config object in function');
+      
+      t.equal(filename, '.config.json', 'filename in function');
+      
+      return obj.settings;
+    }
+  });
+  
+  t.deepEqual(config, {key: 'value'}, 'filename');
+});

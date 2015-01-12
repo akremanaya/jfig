@@ -14,12 +14,12 @@ module.exports = function (data, options) {
   // Return object passed in
   if (isObject(data) && !Array.isArray(data)) {
     
-    return pluckFirst(data, options.pluck);
+    return pluckFirst(data, data, options);
   }
   
   var config = file(data, options);
   
-  return pluckFirst(config, options.pluck);
+  return pluckFirst(config, data, options);
 };
 
 function file (filename, options) {
@@ -59,12 +59,17 @@ function load (filename) {
   return require(filename);
 }
 
-function pluckFirst (obj, key) {
+function pluckFirst (obj, config, options) {
+  
+  var key = options.pluck;
   
   if (!key) {
     return obj;
   }
   
+  if (typeof key === 'function') {
+    return key(obj, config);
+  }
   
   if (Array.isArray(key)) {
     key = find(key, function (k) {
